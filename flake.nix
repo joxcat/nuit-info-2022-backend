@@ -87,21 +87,25 @@
 
         checkAudit = craneLib.cargoAudit (commonArgs // {
           inherit cargoArtifacts advisory-db;
-          cargoAuditExtraArgs = "--config .cargo/deny.toml";
         });
 
         dockerSisServer = pkgs.dockerTools.buildImage {
-          HOST="0.0.0.0";
-
           name = "sis-server";
           tag = "latest";
           copyToRoot = [ sisServer ];
           config = {
+            Env = [
+              "HOST=0.0.0.0"
+            ];
             EntryPoint = [ "${sisServer}/bin/sis-server" ];
           };
         };
       in { 
         packages.default = sisServer;
+        apps.default = {
+          type = "app";
+          program = "${sisServer}/bin/sis-server";
+        };
 
         packages.docker = dockerSisServer;
 
@@ -111,8 +115,7 @@
             sisServer
             checkFmt
             checkClippy
-            checkTests
-            checkAudit;
+            checkTests;
         };
       });
 }

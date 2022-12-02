@@ -12,7 +12,7 @@ rustflags = [
     "-Clink-self-contained=yes"
 ]
 
-[target.'cfg(all(target_os = "linux", debug_assertions))']
+[target.'cfg(feature = "mold")']
 rustflags = [
     "-Clinker=clang",
     "-Clink-arg=-fuse-ld=/usr/local/bin/mold"

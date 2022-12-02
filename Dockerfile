@@ -1,7 +1,6 @@
 FROM rust:alpine as builder
 
 RUN apk add --no-cache \
-  clang \
 	musl-dev
 
 WORKDIR /app
