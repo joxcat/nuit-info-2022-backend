@@ -1,3 +1,6 @@
+//! Based on the `https://github.com/matklad/cargo-xtask project.
+//! This crate is the equivalent of a Makefile, but designed for Rust.
+
 use std::env;
 
 use clap::Parser;
@@ -38,21 +41,29 @@ fn main() -> Result<()> {
 
     match Command::parse() {
         Command::Setup => {
-            cmd!("sh", "-c", format!("{cargo} install cargo-nextest")).run()?;
-            cmd!(
-                "sh",
-                "-c",
-                format!("{cargo} install cargo-audit --features=fix")
-            )
-            .run()?;
-            cmd!("sh", "-c", format!("{cargo} install cargo-about")).run()?;
-            cmd!("sh", "-c", format!("{cargo} install cargo-deny")).run()?;
+            let install_if_not_found = |name, features: Option<&str>| {
+                cmd!(
+                    "sh",
+                    "-c",
+                    format!(
+                        "if ! command -v {name} >/dev/null; then {cargo} install {name} {}; fi",
+                        features.map_or_else(
+                            || "".to_string(),
+                            |features| format!("--features={features}")
+                        ),
+                    )
+                )
+            };
+            install_if_not_found("cargo-nextest", None).run()?;
+            install_if_not_found("cargo-audit", Some("fix")).run()?;
+            install_if_not_found("cargo-about", None).run()?;
+            install_if_not_found("cargo-deny", None).run()?;
         }
         Command::License => {
             cmd!(
                 "sh",
                 "-c",
-                format!("{cargo} about generate --workspace {workspace_root}/.cargo/about.hbs -o LICENSE")
+                format!("{cargo} about generate --config {workspace_root}/.cargo/about.toml --workspace {workspace_root}/.cargo/about.hbs -o LICENSE")
             )
             .run()?;
             cmd!(

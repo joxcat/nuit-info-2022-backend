@@ -10,11 +10,15 @@ Par Johan Planchon pour la nuit de l'info 2022
       * [Cible](#cible)
       * [Client =&gt; SIS ASSOCIATION](#client--sis-association)
       * [Sources](#sources)
+   * [Dependances &amp; Compilation](#dependances--compilation)
+      * [Avec nix](#avec-nix)
+      * [Sans nix](#sans-nix)
+   * [Technologies](#technologies)
    * [Défis](#défis)
       * [Ne rien faire, c’est parfois mieux](#ne-rien-faire-cest-parfois-mieux)
       * [Submit me if you can !](#submit-me-if-you-can-)
       * [Docker](#docker)
-         * [Sans nix =&gt; taille de l'image](#sans-nix--taille-de-limage)
+         * [Sans nix =&gt; taille de l'image 8.46MB](#sans-nix--taille-de-limage-846mb)
          * [Avec nix =&gt; taille de l'image 18.3MB](#avec-nix--taille-de-limage-183mb)
       * [Easter egg](#easter-egg)
          * [Inspirations et sources](#inspirations-et-sources)
@@ -24,13 +28,10 @@ Par Johan Planchon pour la nuit de l'info 2022
          * [Pourquoi Nix](#pourquoi-nix)
          * [Pourquoi une compatibilité avec Docker](#pourquoi-une-compatibilité-avec-docker)
          * [Pourquoi cibler musl](#pourquoi-cibler-musl)
-   * [Dependances](#dependances)
-      * [Avec nix](#avec-nix)
-      * [Sans nix](#sans-nix)
-   * [Technologies](#technologies)
+         * [Extensions possibles](#extensions-possibles)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: code, at: Fri Dec  2 01:06:02 UTC 2022 -->
+<!-- Added by: code, at: Fri Dec  2 02:49:15 UTC 2022 -->
 
 <!--te-->
 
@@ -62,10 +63,11 @@ Le but est de sensibiliser les jeunes adultes (mais aussi les plus âgés)
 - https://www.facebook.com/SidaInfoService
 
 ## Dependances & Compilation
+*Génération du sommaire dans le markdown avec [ekalinin/github-markdown-toc](https://github.com/ekalinin/github-markdown-toc)*
 
 ### Avec nix
 - nix (avec les [flakes](https://nixos.wiki/wiki/Flakes) activés)
-Compilation avec un simple `nix build`, le binaire se trouve dans `result/bin/sis-server`
+Compilation avec un simple `nix build`, le binaire se trouve dans `result/bin/sis-server`  
 
 ### Sans nix
 - rust 1.65
@@ -92,8 +94,8 @@ Non réalisé sur le backend
 ### Docker
 https://www.nuitdelinfo.com/inscription/defis/330  
 
-#### Sans nix => taille de l'image 
-- Avantages: Simplicité de Docker
+#### Sans nix => taille de l'image 8.46MB
+- Avantages: Simplicité de Docker et image plus légère
 - Désavantages: Une image non atomique
 1. `docker build . -t sis-server`
 2. `docker run --rm --name sis-server -P 8080:8080 sis-server`

@@ -1,4 +1,7 @@
 #![forbid(unsafe_code)]
+
+//! Library to help with the setup of loggers.
+
 #[cfg(feature = "either")]
 use either::{for_both, Either};
 #[cfg(feature = "log_file")]
@@ -16,6 +19,7 @@ pub use tracing::log::{Level, LevelFilter};
 
 pub mod layers;
 
+/// Setup a simple logger with an env filter.
 pub fn setup_simple_logger() {
     // This will print tracing events to standard output for humans to read
     tracing_subscriber::Registry::default()
@@ -24,6 +28,7 @@ pub fn setup_simple_logger() {
         .init();
 }
 
+/// Setup a tree logger with an env filter.
 #[cfg(feature = "tree")]
 pub fn setup_hierarchical_logger() {
     // This will print tracing events to standard output for humans to read
@@ -33,6 +38,7 @@ pub fn setup_hierarchical_logger() {
         .init();
 }
 
+/// Setup a tree logger on stdout and a simple on file with an env filter.
 #[cfg(all(feature = "log_file", feature = "tree"))]
 pub fn setup_logger_with_logfiles(logfile_prefix: &str) -> Option<WorkerGuard> {
     // This will print tracing events to standard output for humans to read

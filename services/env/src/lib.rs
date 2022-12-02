@@ -1,3 +1,5 @@
+//! Provide utilities for working with the environment variables.
+
 use std::{env::VarError, ffi::OsStr, path::Path};
 
 use dotenvy::{dotenv, from_path};
@@ -13,14 +15,17 @@ pub enum Error {
     DotEnv(#[from] dotenvy::Error),
 }
 
+/// Load .env and ignore any errors
 pub fn setup_env() {
     dotenv().ok();
 }
 
+/// Load env from a specific path and ignore any errors
 pub fn setup_env_with_path(path: &Path) {
     from_path(path).ok();
 }
 
+/// Check if an environment variable exist and is not empty
 #[tracing::instrument(level = "debug")]
 pub fn var_not_empty<K>(key: K) -> Result<String, Error>
 where

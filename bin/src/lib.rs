@@ -11,6 +11,7 @@ pub(crate) mod macros;
 pub async fn run_server(addr: SocketAddr) -> Result<()> {
     let (server_tx, server_rx) = tokio::sync::oneshot::channel::<()>();
 
+    // NOTE: This is the graceful shutdown handler
     {
         tokio::spawn(async move {
             debug!("Spawned Ctrl-C handler task");
@@ -29,6 +30,7 @@ pub async fn run_server(addr: SocketAddr) -> Result<()> {
     let app = Router::new();
 
     info!("Listening on {}", addr);
+    // NOTE: This is the server handler
     Server::bind(&addr)
         .serve(app.into_make_service())
         .with_graceful_shutdown(async {

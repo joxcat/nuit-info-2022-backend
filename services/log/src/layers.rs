@@ -4,6 +4,7 @@ use tracing_subscriber::{fmt, EnvFilter, Layer};
 #[cfg(feature = "tree")]
 use tracing_tree::HierarchicalLayer;
 
+/// Add a pretty-printed log layer to the subscriber.
 pub fn with_pretty<S>() -> Box<dyn Layer<S> + Send + Sync + 'static>
 where
     S: tracing::Subscriber,
@@ -17,6 +18,7 @@ where
         .boxed()
 }
 
+/// Add an environment filter based on the LOG_LEVEL env variable to the subscriber.
 pub fn with_env<S>() -> Box<dyn Layer<S> + Send + Sync + 'static>
 where
     S: tracing::Subscriber,
@@ -25,6 +27,7 @@ where
     EnvFilter::from_env("LOG_LEVEL").boxed()
 }
 
+/// Add a hierarchical layer to the subscriber (to see the different spans levels).
 #[cfg(feature = "tree")]
 pub fn with_hierarchical<S>() -> Box<dyn Layer<S> + Send + Sync + 'static>
 where
@@ -39,6 +42,7 @@ where
         .boxed()
 }
 
+/// Add an honeycomb reporting layer to the subscriber.
 #[cfg(feature = "honeycomb")]
 pub fn with_honeycomb<S>(
     service_name: &'static str,
@@ -67,6 +71,7 @@ where
     }
 }
 
+/// Add a file (using the LOG_DIRECTORY env variable) logging output to the subscriber.
 #[cfg(feature = "log_file")]
 pub fn with_logfiles<S>(
     logfile_prefix: &str,

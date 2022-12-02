@@ -31,7 +31,7 @@ macro_rules! static_files_server {
                     .header(
                         header::CONTENT_TYPE,
                         HeaderValue::from_str($content_type).unwrap(),
-                    )
+                    ) // TODO: Stream the file instead of sending it in one go
                     .body(body::boxed(Full::from(file.contents())))
                     .unwrap(),
             }
