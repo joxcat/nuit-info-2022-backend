@@ -2,6 +2,7 @@
 members = ["bin", "services/*", "xtask"]
 
 [workspace.package]
+authors = ["Johan Planchon <johan@planchon.dev>"]
 version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"

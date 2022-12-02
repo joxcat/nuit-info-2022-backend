@@ -3,6 +3,7 @@ name = "sis-server"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+authors.workspace = true
 
 [dependencies]
 logging = { workspace = true, features = ["log_file"] }

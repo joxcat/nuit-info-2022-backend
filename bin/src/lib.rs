@@ -6,6 +6,7 @@ use logging::{debug, info, trace, tracing};
 use std::net::SocketAddr;
 
 pub(crate) mod macros;
+pub(crate) mod nostalgia;
 
 #[tracing::instrument]
 pub async fn run_server(addr: SocketAddr) -> Result<()> {

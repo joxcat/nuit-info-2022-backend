@@ -112,7 +112,8 @@ https://www.nuitdelinfo.com/inscription/defis/328
 
 #### Inspirations et sources
 - https://twitchplayspokemon.org
-- https://github.com/vxgmichel/gambatte-terminal
+- https://github.com/danShumway/serverboy.js
+- https://github.com/boa-dev/boa
 
 ### Du propre
 https://www.nuitdelinfo.com/inscription/defis/370  
