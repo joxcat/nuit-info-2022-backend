@@ -2,7 +2,7 @@
 
 use axum::{Router, Server};
 pub use eyre::{Error, Result};
-use log::{debug, info, trace, tracing};
+use logging::{debug, info, trace, tracing};
 use std::net::SocketAddr;
 
 pub(crate) mod macros;

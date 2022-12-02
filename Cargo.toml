@@ -59,7 +59,7 @@ duct = "0.13"
 sha2 = "0.10.6"
 base64 = "0.13.0"
 
-log = { path = "./services/log" }
+logging = { path = "./services/logging" }
 env = { path = "./services/env" }
 
 [profile.release]

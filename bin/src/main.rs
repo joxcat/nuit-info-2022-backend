@@ -39,7 +39,7 @@ async fn main() -> Result<()> {
         set_var("LOG_LEVEL", "info");
     }
 
-    let _logfiles_writer_handle = log::setup_logger_with_logfiles(env!("CARGO_PKG_NAME"));
+    let _logfiles_writer_handle = logging::setup_logger_with_logfiles(env!("CARGO_PKG_NAME"));
 
     run_server(app.address.parse()?).await?;
 

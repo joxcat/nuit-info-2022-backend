@@ -1,4 +1,4 @@
-//! Based on the `https://github.com/matklad/cargo-xtask project.
+//! Based on the <https://github.com/matklad/cargo-xtask> project.
 //! This crate is the equivalent of a Makefile, but designed for Rust.
 
 use std::env;
@@ -102,6 +102,12 @@ fn main() -> Result<()> {
                 format!("{cargo} build --release --locked --target=x86_64-unknown-linux-musl")
             )
             .run()?;
+            cmd!(
+                "sh",
+                "-c",
+                format!("{cargo} doc --release --locked --target=x86_64-unknown-linux-musl")
+            )
+            .run()?;
             cmd!("sh", "-c", format!("rm -rf {workspace_root}/dist")).run()?;
             cmd!("sh", "-c", format!("mkdir -p {workspace_root}/dist")).run()?;
             cmd!(
@@ -111,6 +117,7 @@ fn main() -> Result<()> {
             )
             .run()?;
             cmd!("sh", "-c", format!("cp {workspace_root}/target/x86_64-unknown-linux-musl/release/sis-server {workspace_root}/dist")).run()?;
+            cmd!("sh", "-c", format!("cp {workspace_root}/target/x86_64-unknown-linux-musl/doc {workspace_root}/dist")).run()?;
         }
         Command::Toc => {
             cmd!(
