@@ -1,0 +1,10 @@
+[package]
+name = "env"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+dotenvy.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
